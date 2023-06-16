@@ -4,6 +4,7 @@
   "description": "In this two part exercise you are tasked with create a REST API for accessing Disney Villain data, complete with test suite.",
   "main": ".eslintrc.js",
   "scripts": {
+    "lint": "eslint --fix --ext .js,.jsx .",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
