@@ -1,15 +1,23 @@
 const { villainsModel } = require('./index')
 
 const getAllVillains = async () => {
-  const villainsData = await villainsModel.findAll()
+  try {
+    const allVillains = await villainsModel.findAll()
 
-  return villainsData
+    return allVillains
+  } catch (error) {
+    throw new Error('ERROR!')
+  }
 }
 
 const getOneVillain = async (searchSlug) => {
-  const foundVillain = await villainsModel.findOne({ where: { slug: searchSlug } })
+  try {
+    const foundVillain = await villainsModel.findOne({ where: { slug: searchSlug } })
 
-  return foundVillain
+    return foundVillain
+  } catch (error) {
+    throw new Error('Database error')
+  }
 }
 
 const addVillain = async (newVillain) => {
