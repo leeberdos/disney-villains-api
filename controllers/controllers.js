@@ -11,19 +11,25 @@ const verifySlug = (request, response, next) => {
 }
 
 const getAllVillainsController = async (request, response) => {
-  const villainsData = await getAllVillains()
+  try {
+    const villainsResult = await getAllVillains()
 
-  return response.send(villainsData)
+    return response.send(villainsResult)
+  } catch (error) {
+    return response.sendStatus(500)
+  }
 }
 
 const getOneVillainController = async (request, response) => {
-  // use model to find villain
-  const foundVillain = await getOneVillain(request.params.slug)
+  try {
+    const foundVillain = await getOneVillain(request.params.slug)
 
-  // send 404 if there is an error with data provided
-  if (!foundVillain) return response.status(404).send('😈Villain was not found😈')
+    if (!foundVillain.slug) return response.sendStatus(404)
 
-  return response.send(foundVillain)
+    return response.send(foundVillain)
+  } catch (error) {
+    return response.sendStatus(500)
+  }
 }
 
 const addVillainController = async (request, response) => {
